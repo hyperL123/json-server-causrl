@@ -1,2 +1,80 @@
 // TODO: Wire up the app's behavior here.
 // NOTE: The TODOs are listed in index.html
+
+const courses = document.querySelector('#course');
+
+const url =
+  'https://jsonserverjevaej-2tkw--3000.local-credentialless.webcontainer.io/api/v1/courses';
+
+fetch(url)
+  .then((response) => response.json())
+  .then((data) => {
+    console.log(data);
+    data.forEach((course) => {
+      const option = document.createElement('option');
+      option.value = course.id;
+      option.text = course.display;
+      courses.appendChild(option);
+    });
+  })
+  .catch((error) => console.log(error));
+
+const courseSelect = document.querySelector('#course');
+const uvuIdInput = document.querySelector('#uvuId');
+
+courseSelect.addEventListener('change', () => {
+  if (courseSelect.value !== '') {
+    uvuIdInput.style.display = 'block';
+  } else {
+    uvuIdInput.style.display = 'none';
+  }
+});
+
+const regex = /^[0-9]{8}$/;
+
+uvuIdInput.addEventListener('change', (event) => {
+  if (regex.test(event.target.value)) {
+    // call your fetch API here
+    console.log('success');
+    event.target.style.outline = 'none';
+    fetch(
+      'https://jsonserverjevaej-2tkw--3000.local-credentialless.webcontainer.io/api/v1/logs?courseId=cs4660&uvuId=10111111'
+    )
+      //+ event.target.value
+      .then((response) => {
+        if (response.status === 200) {
+          return response.json();
+        } else {
+          // remove the elements
+          const uvuIdDisplay = document.querySelector('#uvuIdDisplay');
+          const logsContainer = document.querySelector('#logs');
+          uvuIdDisplay.textContent = '';
+          logsContainer.innerHTML = '';
+          throw new Error('API call failed');
+        }
+      })
+      .then((data) => {
+        const uvuIdDisplay = document.querySelector('#uvuIdDisplay');
+        const logsContainer = document.querySelector('#logs');
+        let uvuId = data[0].uvuId;
+        uvuIdDisplay.textContent = `Studnet Logs for ${uvuId}`;
+        data.forEach((log) => {
+          const logItem = document.createElement('li');
+          const date = document.createElement('div');
+          const logText = document.createElement('pre');
+          date.innerHTML = `<small>${log.date}</small>`;
+          logText.innerHTML = `<p>${log.text}</p>`;
+          logItem.appendChild(date);
+          logItem.appendChild(logText);
+          logsContainer.appendChild(logItem);
+          logItem.addEventListener('click', (event) => {
+            logText.classList.toggle('hidden');
+          });
+        });
+      });
+  } else {
+    console.log('not success');
+    event.target.style.outline = '1px solid red';
+    // show an error message or do something else
+  }
+});

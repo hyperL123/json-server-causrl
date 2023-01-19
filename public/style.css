@@ -1,2 +1,5 @@
 /* TODO: make it look awesome. */
 /* TODO: make it responsive. */
+.hidden {
+  display: none;
+}
