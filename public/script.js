@@ -1,6 +1,3 @@
-// TODO: Wire up the app's behavior here.
-// NOTE: The TODOs are listed in index.html
-
 const courses = document.querySelector('#course');
 
 const url =
@@ -65,7 +62,7 @@ uvuIdInput.addEventListener('change', (event) => {
           const date = document.createElement('div');
           const logText = document.createElement('pre');
           date.innerHTML = `<small>${log.date}</small>`;
-          logText.innerHTML = `<p>${log.text}</p>`;
+          logText.innerHTML = `<p>${log.text}</p><br/>`;
           logItem.appendChild(date);
           logItem.appendChild(logText);
           logsContainer.appendChild(logItem);
@@ -97,7 +94,7 @@ document
           uvuId: uvuId,
           date: currentTime,
           text: log_textarea,
-          id: generateRandomId(),
+          id: currentTime + generateRandomId(),
         }),
         headers: {
           'Content-Type': 'application/json',

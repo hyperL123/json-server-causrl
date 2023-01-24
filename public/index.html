@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="en-US">
-
   <head>
     <title>Student Logs</title>
     <meta charset="UTF-8" />
-   
+
     <link
       rel="shortcut icon"
       href="https://cdn.sstatic.net/Sites/stackoverflow/img/favicon.ico"
@@ -12,7 +11,6 @@
     />
 
     <link rel="stylesheet" href="style.css" />
-   
   </head>
   <body>
     <form>
@@ -28,9 +26,8 @@
       <br />
       <br />
 
-     
       <label for="uvuId">UVU ID</label><br />
-    
+
       <input
         type="text"
         id="uvuId"
@@ -50,16 +47,8 @@
         id="log_textarea"
       ></textarea
       ><br />
-      <!-- TODO: Button should be disabled until the logs, if any, are displayed and there's text in the textarea TALK -->
-      <button type="submit" id="add_log_btn" data-cy="add_log_btn">
-        Add Log
-      </button>
-      <!-- TODO: Button should AJAX PUT the textarea value to json-server which will store it TALK -->
+      <button id="add_log_btn" data-cy="add_log_btn">Add Log</button>
     </form>
     <script src="script.js"></script>
-    <!-- X: Load the JS file -->
   </body>
-  <!-- TODO: add appropriate comments you feel are necessary, if any, for the next coder to understand -->
 </html>
-
-<!-- TODO: move all TODOs that done above to down below here and change the label to DONE:. -->
