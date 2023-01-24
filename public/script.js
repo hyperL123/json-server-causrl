@@ -80,6 +80,7 @@ uvuIdInput.addEventListener('change', (event) => {
 document
   .getElementById('add_log_btn')
   .addEventListener('click', function (event) {
+    console.log('hello world');
     event.preventDefault();
     const course = document.querySelector('#course').value;
     const uvuId = document.querySelector('#uvuId').value;
