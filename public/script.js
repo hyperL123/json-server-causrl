@@ -33,12 +33,14 @@ courseSelect.addEventListener('change', () => {
 const regex = /^[0-9]{8}$/;
 
 uvuIdInput.addEventListener('change', (event) => {
+  const course = document.querySelector('#course').value;
+  const uvuId = document.querySelector('#uvuId').value;
   if (regex.test(event.target.value)) {
     // call your fetch API here
     console.log('success');
     event.target.style.outline = 'none';
     fetch(
-      `https://jsonserverjevaej-2tkw--3000.local-credentialless.webcontainer.io/api/v1/logs?courseId=cs4660&uvuId=10111111`
+      `https://jsonserverjevaej-2tkw--3000.local-credentialless.webcontainer.io/api/v1/logs?courseId=${course}&uvuId=${uvuId}`
     )
       //+ event.target.value
       .then((response) => {
