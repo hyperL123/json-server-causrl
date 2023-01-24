@@ -44,7 +44,7 @@ uvuIdInput.addEventListener('change', (event) => {
     )
       //+ event.target.value
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === 200 || response.status === 304) {
           return response.json();
         } else {
           // remove the elements
@@ -77,6 +77,57 @@ uvuIdInput.addEventListener('change', (event) => {
   } else {
     console.log('not success');
     event.target.style.outline = '1px solid red';
-    // show an error message or do something else
+  }
+});
+
+document
+  .getElementById('add_log_btn')
+  .addEventListener('click', function (event) {
+    event.preventDefault();
+    const course = document.querySelector('#course').value;
+    const uvuId = document.querySelector('#uvuId').value;
+    const log_textarea = document.querySelector('#log_textarea').value;
+    const currentTime = new Date().toLocaleString();
+    fetch(
+      'https://jsonserverjevaej-2tkw--3000.local-credentialless.webcontainer.io/api/v1/logs',
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          courseId: course,
+          uvuId: uvuId,
+          date: currentTime,
+          text: log_textarea,
+          id: generateRandomId(),
+        }),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+  });
+
+function generateRandomId() {
+  var possible =
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  var text = '';
+  for (var i = 0; i < 6; i++) {
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
+  }
+  return text;
+}
+
+const logTextarea = document.getElementById('log_textarea');
+const addLogBtn = document.getElementById('add_log_btn');
+
+addLogBtn.disabled = true; // initially disabled
+
+logTextarea.addEventListener('change', () => {
+  if (logTextarea.value !== '') {
+    addLogBtn.disabled = false;
+  } else {
+    addLogBtn.disabled = true;
   }
 });

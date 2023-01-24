@@ -1,47 +1,44 @@
 <!DOCTYPE html>
 <html lang="en-US">
-  <!-- X: set the lang attribute to American English -->
 
   <head>
     <title>Student Logs</title>
     <meta charset="UTF-8" />
-    <!-- X: set the characterset to utf8 -->
+   
     <link
       rel="shortcut icon"
       href="https://cdn.sstatic.net/Sites/stackoverflow/img/favicon.ico"
       type="image/x-icon"
     />
-    <!-- X: temporarily use stackoverflow's favicon. "https://cdn.sstatic.net/Sites/stackoverflow/Img/favicon.ico"-->
+
     <link rel="stylesheet" href="style.css" />
-    <!-- X: Load the CSS file -->
+   
   </head>
   <body>
     <form>
+      <label for="uvuId">Course </label><br />
       <select
         aria-label="Select Course"
         id="course"
         name="course"
         data-cy="course_select"
       >
-        <option selected value="">Choose Courses</option></select
-      ><br />
+        <option selected value="">Choose Courses</option>
+      </select>
+      <br />
+      <br />
 
-      <!-- X: Don't show the uvu id text input box until a course was selected above. -->
-      <!-- X: If course ever becomes unselected, don't show the uvu id text input box.-->
+     
       <label for="uvuId">UVU ID</label><br />
-      <!-- TODO: write `10234567` as sample data on the input field below  -->
-      <!-- X: Ensure the character length never exceeds 8 -->
-      <!-- X: Only numbers, no letters or other characters-->
-      <!-- TODO: When character length reaches 8 and it's only digits, fire off ajax request, if 200 or 304, display results, else appropriately guide the user. -->
+    
       <input
         type="text"
         id="uvuId"
         name="uvuId"
         data-cy="uvuId_input"
         style="display: none"
+        placeholder="10234567"
       />
-      <!-- X: The following options are currently static values to show you an example.  -->
-      <!-- You must replace them with dynamic data by ajaxing GET https://json-server-ft3qa5--3000.local.webcontainer.io/logs?courseId=<courseID>&uvuId=<uvuID> -->
       <h3 id="uvuIdDisplay" data-cy="uvuIdDisplay"></h3>
       <ul data-cy="logs" id="logs"></ul>
 
@@ -50,10 +47,13 @@
         style="height: 75px"
         aria-label="add log textarea"
         data-cy="log_textarea"
+        id="log_textarea"
       ></textarea
       ><br />
       <!-- TODO: Button should be disabled until the logs, if any, are displayed and there's text in the textarea TALK -->
-      <button type="submit" data-cy="add_log_btn">Add Log</button>
+      <button type="submit" id="add_log_btn" data-cy="add_log_btn">
+        Add Log
+      </button>
       <!-- TODO: Button should AJAX PUT the textarea value to json-server which will store it TALK -->
     </form>
     <script src="script.js"></script>
