@@ -38,7 +38,7 @@ uvuIdInput.addEventListener('change', (event) => {
     console.log('success');
     event.target.style.outline = 'none';
     fetch(
-      'https://jsonserverjevaej-2tkw--3000.local-credentialless.webcontainer.io/api/v1/logs?courseId=cs4660&uvuId=10111111'
+      `https://jsonserverjevaej-2tkw--3000.local-credentialless.webcontainer.io/api/v1/logs?courseId=cs4660&uvuId=10111111`
     )
       //+ event.target.value
       .then((response) => {
